@@ -15,10 +15,13 @@
             <hr>
             <input type="text" v-model="lastName">
             <hr>
+            <h2>Hello, {{ fullName }}</h2>
+            <hr>
             <button class="btn btn-success"
                     v-on:click="showText = !showText">
                 Toggle text
             </button>
+            <hr>
             <div v-show="showText">Some text</div>
         </div>
     </div>
@@ -31,11 +34,7 @@
                 showText: false
 
             },
-            methods: {
-                onChange (e) {
-                    console.log(this)
-                    console.log(e)
-                },
+            computed: {
                 toggleName () {
                     this.showName = !this.showName
                 },
