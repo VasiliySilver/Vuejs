@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sample">
+            <input type="text" v-model="firstName">
+            <hr>
+            <input type="text" v-model="lastName">
+            <hr>
+            <button class="btn btn-success"
+                    v-on:click="showText = !showText">
+                Toggle text
+            </button>
+            <div v-show="showText">Some text</div>
+        </div>
+    </div>
+    <script>
+        let sample = new Vue({
+            el: '.sample',
+            data: {
+                firstName: '',
+                lastName: '',
+                showText: false
+
+            },
+            methods: {
+                onChange (e) {
+                    console.log(this)
+                    console.log(e)
+                },
+                toggleName () {
+                    this.showName = !this.showName
+                },
+                fullName () {
+                    console.log('render fullName')
+                    return this.firstName + ' ' + this.lastName
+                }
+            }
+        });
+
+        console.log(sample)
+
+    </script>
+</body>
+</html>
