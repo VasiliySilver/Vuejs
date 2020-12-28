@@ -1,0 +1,77 @@
+<!-- Валидатор -->
+<!-- Валидатор: https://validator.w3.org/-->
+<!-- Библиотека: https://www.npmjs.com/package/vue-w3c-valid -->
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sample">
+            <label for="promo">Здесь промо</label>
+            <br>
+            <input id="promo" type="text" data-v-model="promo">
+            
+            <hr>
+            <label for="first">Имя</label>
+            <br>
+            <input id="first" type="text" data-v-model="firstName">
+            
+            <hr>
+            <label for="last">Фамилия</label>
+            <br>
+            <input id="last" type="text" data-v-model="lastName">
+            
+            <hr>
+            <h2 data-v-show="showText">Hello, {{ fullName }}</h2>
+            <hr>
+            <button class="btn btn-success"
+                    data-v-on_click="showText = !showText">
+                Toggle text
+            </button>
+            <hr>
+            <div>Your sale is {{ sale }} %</div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue-w3c-valid/dist/simple.js"></script>
+    <script>
+        function getSale (code) {
+            let codes = {
+                newYear: 10,
+                some: 20
+            }
+            return (codes[code] !== undefined) ? codes[code] : 0
+        }
+
+        new VueW3CValid({
+            el: '.sample'
+        })
+
+        let sample = new Vue({
+            el: '.sample',
+            data: {
+                firstName: '',
+                lastName: '',
+                promo: '',
+                showText: false
+            },
+            computed: {
+                fullName () {
+                    console.log('render fullName')
+                    return this.firstName + ' ' + this.lastName
+                },
+                sale () {
+                    return getSale(this.promo)
+                }
+            }
+        })
+        console.log(sample)
+    </script>
+</body>
+</html>
